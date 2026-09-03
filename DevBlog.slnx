@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="DevBlog.Business/DevBlog.Business.csproj" />
+  <Project Path="DevBlog.Core/DevBlog.Core.csproj" />
+  <Project Path="DevBlog.DataAccess/DevBlog.DataAccess.csproj" />
+  <Project Path="DevBlog.WebUI/DevBlog.WebUI.csproj" />
+</Solution>
