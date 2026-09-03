@@ -6,4 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DevBlog.Business\DevBlog.Business.csproj" />
+    <ProjectReference Include="..\DevBlog.Core\DevBlog.Core.csproj" />
+    <ProjectReference Include="..\DevBlog.DataAccess\DevBlog.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
