@@ -1,50 +1,153 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr" data-bs-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DevBlog.WebUI</title>
+    <title>@ViewData["Title"] - Developer Ahmet</title>
     <script type="importmap"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DevBlog.WebUI.styles.css" asp-append-version="true" />
+
+    <style>
+            :root {
+                --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            }
+
+            body {
+                font-family: var(--font-main);
+                background-color: #f8f9fa;
+                color: #212529;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            .navbar-brand-gradient {
+                background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-weight: 800;
+            }
+
+            .card-blog {
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+                border: 1px solid rgba(0,0,0,0.06);
+                border-radius: 1rem;
+                overflow: hidden;
+            }
+
+                .card-blog:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+                }
+
+            footer {
+                margin-top: auto;
+                border-top: 1px solid rgba(0,0,0,0.06);
+            }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DevBlog.WebUI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+    <header class="sticky-top bg-body shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
+            <div class="container">
+                <a class="navbar-brand fs-3 navbar-brand-gradient" asp-area="" asp-controller="Home" asp-action="Index">
+                    Developer Ahmet<span class="text-primary">.</span>
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto ms-lg-4 fw-medium">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Gizlilik</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">Hakkımızda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Software" asp-action="Index">Yazılımlar</a>
                         </li>
                     </ul>
+                    <div class="d-flex align-items-center gap-3">
+                        <form class="d-flex" role="search" asp-controller="Home" asp-action="Index" method="get">
+                            <div class="input-group">
+                                <span class="input-group-text border-end-0 rounded-start-pill ps-3"><i class="bi bi-search text-muted"></i></span>
+                                <input class="form-control border-start-0 rounded-end-pill shadow-none" type="search" name="search" placeholder="Makale ara..." aria-label="Search">
+                            </div>
+                        </form>
+
+                        <!-- Dynamic Theme Switcher Button -->
+                        <button id="themeToggleBtn" class="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;" type="button" aria-label="Temayı Değiştir">
+                            <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
+                        </button>
+
+                        <a href="/Admin" class="btn btn-outline-primary rounded-pill px-4 fw-semibold"><i class="bi bi-speedometer2 me-1"></i> Admin</a>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - DevBlog.WebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-white py-4 text-muted">
+        <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center">
+            <div>
+                &copy; 2026 - <span class="fw-bold text-dark">Developer Ahmet DEVBLOG</span> -
+                <a class="text-decoration-none text-muted" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+            <div class="d-flex gap-3 fs-5 mt-2 mt-sm-0">
+                <a href="#" class="text-reset"><i class="bi bi-github"></i></a>
+                <a href="#" class="text-reset"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="text-reset"><i class="bi bi-linkedin"></i></a>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const themeToggleBtn = document.getElementById("themeToggleBtn");
+                const themeIcon = document.getElementById("themeIcon");
+                const htmlElement = document.documentElement;
+
+                // Hafızada kayıtlı temayı kontrol et, yoksa varsayılan light yap
+                const savedTheme = localStorage.getItem("theme") || "light";
+                setTheme(savedTheme);
+
+                themeToggleBtn.addEventListener("click", function () {
+                    const currentTheme = htmlElement.getAttribute("data-bs-theme");
+                    const newTheme = currentTheme === "dark" ? "light" : "dark";
+                    setTheme(newTheme);
+                });
+
+                function setTheme(theme) {
+                    htmlElement.setAttribute("data-bs-theme", theme);
+                    localStorage.setItem("theme", theme);
+
+                    if (theme === "dark") {
+                        themeIcon.className = "bi bi-sun-fill text-warning";
+                    } else {
+                        themeIcon.className = "bi bi-moon-stars-fill text-dark";
+                    }
+                }
+            });
+    </script>
 </body>
 </html>

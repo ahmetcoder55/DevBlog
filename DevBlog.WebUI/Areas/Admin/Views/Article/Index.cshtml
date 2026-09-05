@@ -1,0 +1,77 @@
+﻿@using DevBlog.Business.DTOs
+@model IEnumerable<ArticleDto>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Makaleler";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h5 class="fw-bold mb-1">Makale Yönetimi</h5>
+            <p class="text-muted small mb-0">Tüm blog yazılarını yönetin ve düzenleyin</p>
+        </div>
+        <a href="/Admin/Article/Create" class="btn btn-primary rounded-3 px-4 fw-semibold">
+            <i class="bi bi-plus-lg me-1"></i> Yeni Makale
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Başlık</th>
+                    <th>Kategori</th>
+                    <th>Yayın Tarihi</th>
+                    <th class="text-end">İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var article in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold text-dark">@article.Title</td>
+                            <td><span class="badge bg-secondary-subtle text-secondary px-3 py-2 rounded-pill">@article.CategoryName</span></td>
+                            <td class="text-muted small">@article.CreatedDate.ToString("dd MMM yyyy HH:mm")</td>
+                            <td class="text-end">
+                                <div class="d-flex gap-1 justify-content-end">
+                                    <a href="/Admin/Article/Edit/@article.Id" class="btn btn-sm btn-outline-primary rounded-2">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form action="/Admin/Article/Delete/@article.Id"
+                                          method="post"
+                                          class="d-inline"
+                                          onsubmit="return confirm('Bu makaleyi silmek istediğinize emin misiniz?');">
+
+                                        @Html.AntiForgeryToken()
+
+                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-2">
+                                            <i class="bi bi-trash me-1"></i> Sil
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">Henüz yayınlanmış bir makale yok.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

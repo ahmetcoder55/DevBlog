@@ -1,0 +1,76 @@
+﻿@using DevBlog.Business.DTOs
+@model LoginDto
+
+@{
+    Layout = null;
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevBlog Admin - Giriş Yap</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+            body {
+                font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+                background: #0f172a;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .login-card {
+                background: #ffffff;
+                border-radius: 1rem;
+                width: 100%;
+                max-width: 400px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="login-card p-4 shadow-lg">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold text-dark mb-1">DevBlog Admin</h3>
+            <p class="text-muted small">Yönetim paneline erişmek için giriş yapın</p>
+        </div>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger py-2 small mb-3">
+                <div asp-validation-summary="All"></div>
+            </div>
+        }
+
+        <form asp-area="Admin" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label asp-for="UsernameOrEmail" class="form-label text-dark fw-semibold small">Kullanıcı Adı veya E-posta</label>
+                <input asp-for="UsernameOrEmail" name="UsernameOrEmail" class="form-control rounded-3" placeholder="admin" required />
+                <span asp-validation-for="UsernameOrEmail" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label text-dark fw-semibold small">Şifre</label>
+                <input asp-for="Password" name="Password" type="password" class="form-control rounded-3" placeholder="••••••••" required />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input asp-for="RememberMe" type="checkbox" value="true" class="form-check-input" />
+                <label asp-for="RememberMe" class="form-check-label text-secondary small">Beni Hatırla</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 rounded-3 py-2 fw-semibold shadow-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Oturum Aç
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>

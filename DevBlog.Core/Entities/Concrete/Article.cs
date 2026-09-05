@@ -16,7 +16,7 @@ namespace DevBlog.Core.Entities.Concrete
         public int ViewCount { get; set; } = 0;
         public int EstimatedReadTimeMinutes { get; set; } = 1;
         public bool IsPublished { get; set; } = false;
-        public DateTime? PublishedDate { get; set; }
+        public DateTime? PublishedDate { get; set; } = DateTime.UtcNow;
 
         // Navigation Properties
         public int CategoryId { get; set; }

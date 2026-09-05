@@ -1,0 +1,149 @@
+﻿@using DevBlog.Business.DTOs
+@model ArticleDto
+
+@{
+    ViewData["Title"] = Model.Title;
+    var comments = ViewBag.Comments as List<CommentDto> ?? new List<CommentDto>();
+}
+
+<div class="bg-white py-5 border-bottom mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" class="text-decoration-none"><i class="bi bi-house me-1"></i>Ana Sayfa</a></li>
+                        <li class="breadcrumb-item"><a href="/?categoryId=@Model.CategoryId" class="text-decoration-none">@Model.CategoryName</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Makale</li>
+                    </ol>
+                </nav>
+
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 fw-semibold mb-3">@Model.CategoryName</span>
+                <h1 class="display-5 fw-extrabold text-dark mb-4 lh-sm">@Model.Title</h1>
+
+                <div class="d-flex align-items-center gap-3 text-muted small border-top border-bottom py-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">
+                            A
+                        </div>
+                        <div>
+                            <span class="fw-semibold text-dark d-block">Ahmet</span>
+                            <span class="text-muted extra-small">Yazılım Geliştirici</span>
+                        </div>
+                    </div>
+                    <div class="ms-auto d-flex align-items-center gap-3">
+                        <span><i class="bi bi-calendar3 me-1"></i>@Model.CreatedDate.ToString("dd MMMM yyyy")</span>
+                        <span><i class="bi bi-clock me-1"></i>5 dk okuma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            @if (!string.IsNullOrEmpty(Model.ThumbnailUrl))
+            {
+                <div class="mb-5">
+                    <img src="@Model.ThumbnailUrl" class="img-fluid rounded-4 shadow-sm w-100" alt="@Model.Title" style="max-height: 450px; object-fit: cover;">
+                </div>
+            }
+
+            <!-- Article Body -->
+            <div class="article-text fs-5 text-dark lh-lg mb-5" style="letter-spacing: -0.003em;">
+                @Model.Content
+            </div>
+
+            <!-- Share & Navigation -->
+            <div class="d-flex align-items-center justify-content-between p-4 bg-light rounded-4 mb-5 border">
+                <span class="fw-bold text-dark">Bu yazıyı paylaş:</span>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-secondary rounded-circle" style="width: 40px; height: 40px;"><i class="bi bi-twitter-x"></i></button>
+                    <button class="btn btn-outline-secondary rounded-circle" style="width: 40px; height: 40px;"><i class="bi bi-linkedin"></i></button>
+                    <button class="btn btn-outline-secondary rounded-circle" style="width: 40px; height: 40px;"><i class="bi bi-link-45deg"></i></button>
+                </div>
+            </div>
+
+            <!-- Onaylanmış Yorumlar Listesi -->
+            <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
+                <h5 class="fw-bold text-dark mb-4 d-flex align-items-center gap-2">
+                    <i class="bi bi-chat-left-text text-primary"></i> Yorumlar (@comments.Count)
+                </h5>
+
+                @if (comments.Any())
+                {
+                    <div class="d-flex flex-column gap-3">
+                        @foreach (var comment in comments)
+                        {
+                            <div class="p-3 bg-light rounded-3 border">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-primary-subtle text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                            @comment.AuthorName.Substring(0, 1).ToUpper()
+                                        </div>
+                                        <span class="fw-bold text-dark">@comment.AuthorName</span>
+                                    </div>
+                                    <small class="text-muted"><i class="bi bi-clock me-1"></i>@comment.CreatedDate.ToString("dd MMM yyyy HH:mm")</small>
+                                </div>
+                                <p class="text-secondary mb-0 small lh-base ps-1">@comment.Content</p>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-3 text-muted">
+                        <i class="bi bi-chat-square-quote display-6 d-block mb-2 text-primary-subtle"></i>
+                        <p class="mb-0">Henüz yorum yapılmamış. İlk yorumu sen yap!</p>
+                    </div>
+                }
+            </div>
+
+            <!-- Yorum Ekleme Formu -->
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-5">
+                <h5 class="fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+                    <i class="bi bi-pencil-square text-primary"></i> Yorum Yap
+                </h5>
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show rounded-3 mb-3" role="alert">
+                        <i class="bi bi-check-circle me-1"></i> @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <form asp-controller="Comment" asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="ArticleId" value="@Model.Id" />
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="AuthorName" class="form-control bg-light border rounded-3" placeholder="Adınız Soyadınız *" required />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" name="AuthorEmail" class="form-control bg-light border rounded-3" placeholder="E-Posta Adresiniz *" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea name="Content" rows="3" class="form-control bg-light border rounded-3" placeholder="Yorumunuzu buraya yazın..." required></textarea>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <small class="text-muted"><i class="bi bi-info-circle me-1"></i>Yorumunuz onaylandıktan sonra yayınlanacaktır.</small>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold">
+                            <i class="bi bi-send me-1"></i> Gönder
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <a href="/" class="btn btn-outline-primary rounded-pill px-4 fw-semibold">
+                <i class="bi bi-arrow-left me-1"></i> Tüm Yazılara Dön
+            </a>
+        </div>
+    </div>
+</div>

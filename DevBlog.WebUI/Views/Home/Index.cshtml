@@ -1,8 +1,204 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using DevBlog.Business.DTOs
+@model IEnumerable<ArticleDto>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Modern 3'lü Hero Grid Section -->
+<section class="hero-section py-4 mb-5">
+    <div class="container">
+        <div class="row g-4 align-items-stretch">
+
+            <!-- Sol Kart: Öne Çıkan İçerik -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 fw-semibold mb-3">🔥 Öne Çıkan</span>
+                        <h5 class="fw-bold text-dark mb-2">Clean Architecture & .NET 10</h5>
+                        <p class="text-secondary small mb-0">Sürdürülebilir, test edilebilir ve katmanlı yazılım mimarileri inşa etme rehberi.</p>
+                    </div>
+                    <div class="pt-3 border-top mt-3">
+                        <a href="#categories" class="text-primary fw-semibold text-decoration-none small d-inline-flex align-items-center gap-1">
+                            Yazıları İncele <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orta Kart: Karşılama ve Ana Başlık -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-primary text-white h-100 text-center d-flex flex-column justify-content-center align-items-center">
+                    <span class="badge bg-white text-primary rounded-pill px-3 py-2 mb-3 fw-semibold">🚀 .NET 10 & Clean N-Tier</span>
+                    <h2 class="fw-extrabold mb-3 fs-3">Yazılım ve Mimari Üzerine Güncel Yazılar</h2>
+                    <p class="small text-white-50 mb-0" style="max-width: 320px;">
+                        Modern web teknolojileri, mikroservisler, C# 14, EF Core ve yazılım mimarisi hakkındaki deneyimler.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sağ Kart: Statik Teknoloji Haber Özeti -->
+            <div class="col-lg-4 col-md-12">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h6 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                            <i class="bi bi-newspaper text-primary"></i> Teknoloji Haberleri
+                        </h6>
+                        <span class="badge bg-light text-muted border">Gündem</span>
+                    </div>
+                    <ul class="list-unstyled mb-0 small">
+                        <li class="mb-3 pb-2 border-bottom d-flex justify-content-between align-items-center">
+                            <span class="text-secondary text-truncate me-2 fw-medium">⚡ C# 14 preview özellikleri duyuruldu</span>
+                            <small class="text-muted">Bugün</small>
+                        </li>
+                        <li class="mb-3 pb-2 border-bottom d-flex justify-content-between align-items-center">
+                            <span class="text-secondary text-truncate me-2 fw-medium">🛠️ EF Core 10 yüksek performans ipuçları</span>
+                            <small class="text-muted">Dün</small>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span class="text-secondary text-truncate me-2 fw-medium">🐧 Linux kernel sistem güncellemeleri</span>
+                            <small class="text-muted">3 gün önce</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Main Content Area -->
+<div class="container mb-5">
+    <!-- Categories Filter Bar -->
+    <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3" id="categories">
+        <div class="d-flex align-items-center gap-2 overflow-x-auto pb-2 w-100">
+            <a href="/" class="btn btn-dark rounded-pill px-4 py-2 text-nowrap fw-medium">Tüm Makaleler</a>
+            <a href="/?categoryId=1" class="btn btn-outline-secondary rounded-pill px-4 py-2 text-nowrap fw-medium">.NET & C#</a>
+            <a href="/?categoryId=2" class="btn btn-outline-secondary rounded-pill px-4 py-2 text-nowrap fw-medium">Mimari & Clean Code</a>
+            <a href="/?categoryId=3" class="btn btn-outline-secondary rounded-pill px-4 py-2 text-nowrap fw-medium">Geliştirici Günlüğü</a>
+        </div>
+    </div>
+
+    <!-- Articles Grid (Veritabanındaki Makaleler) -->
+    <div class="row g-4 mb-5">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var article in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <article class="card card-blog h-100 shadow-sm bg-white border-0 rounded-4 overflow-hidden">
+                        <div class="position-relative">
+                            <img src="@article.ThumbnailUrl" class="card-img-top" alt="@article.Title" style="height: 200px; object-fit: cover;">
+                            <span class="badge bg-primary position-absolute top-0 end-0 m-3 rounded-pill px-3 py-2 tag-badge shadow-sm">
+                                @article.CategoryName
+                            </span>
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <div class="text-muted small mb-2 d-flex align-items-center gap-2">
+                                <i class="bi bi-calendar3"></i>
+                                <span>@article.CreatedDate.ToString("dd MMMM yyyy")</span>
+                                <span>•</span>
+                                <i class="bi bi-clock"></i>
+                                <span>5 dk okuma</span>
+                            </div>
+                            <h5 class="card-title fw-bold text-dark lh-sm mb-3">
+                                <a href="/Article/Detail/@article.Slug" class="text-decoration-none text-dark hover-primary">
+                                    @article.Title
+                                </a>
+                            </h5>
+                            <p class="card-text text-secondary mb-4 flex-grow-1">
+                                @(article.Content.Length > 120 ? article.Content.Substring(0, 120) + "..." : article.Content)
+                            </p>
+                            <div class="pt-3 border-top d-flex align-items-center justify-content-between">
+                                <a href="/Article/Detail/@article.Slug" class="fw-bold text-primary text-decoration-none d-inline-flex align-items-center gap-1">
+                                    Devamını Oku <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <div class="bg-white p-5 rounded-4 shadow-sm border mx-auto" style="max-width: 500px;">
+                    <i class="bi bi-journal-x display-1 text-muted mb-3 d-block"></i>
+                    <h4 class="fw-bold">Henüz Makale Bulunmuyor</h4>
+                    <p class="text-muted">Seçilen kriterlere uygun içerik bulunamadı veya henüz veritabanına eklenmedi.</p>
+                    <a href="/" class="btn btn-primary rounded-pill px-4">Sıfırla</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Teknoloji Gündemi / Statik Haberler Bölümü -->
+    <div class="pt-4 border-top">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+                <span class="badge bg-danger-subtle text-danger rounded-pill px-3 py-1 fw-semibold mb-1">GÜNDEM</span>
+                <h3 class="fw-bold text-dark mb-0">Teknoloji & Yazılım Haberleri</h3>
+            </div>
+            <small class="text-muted">Özel Derlenen Haberler</small>
+        </div>
+
+        <div class="row g-4">
+            <!-- Haber 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 h-100 bg-white d-flex flex-column justify-content-between p-4">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-danger rounded-pill px-3 py-1">Yazılım Dünyası</span>
+                            <small class="text-muted"><i class="bi bi-clock me-1"></i>Bugün</small>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">C# 14 ve .NET 10 Lansmanı Gerçekleşti</h5>
+                        <p class="text-secondary small mb-0">Microsoft, yeni C# 14 dil özelliklerini ve performans iyileştirmeleriyle dolu .NET 10 sürümünü geliştiricilere sundu.</p>
+                    </div>
+                    <div class="pt-3 border-top mt-4">
+                        <a href="/News/Detail/csharp-14-duyuruldu" class="btn btn-outline-danger btn-sm rounded-pill w-100 fw-semibold">
+                            Haberi Oku <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Haber 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 h-100 bg-white d-flex flex-column justify-content-between p-4">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-warning text-dark rounded-pill px-3 py-1">Yapay Zeka</span>
+                            <small class="text-muted"><i class="bi bi-clock me-1"></i>Dün</small>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">Local LLM ve Kod Asistanlarında Yeni Dönem</h5>
+                        <p class="text-secondary small mb-0">Yerel bilgisayarlarda çalışan yapay zeka modelleri, yazılımcıların gizli verilerini koruyarak kod yazım sürecini hızlandırıyor.</p>
+                    </div>
+                    <div class="pt-3 border-top mt-4">
+                        <a href="/News/Detail/local-llm-yazilim-gelistirme" class="btn btn-outline-warning text-dark btn-sm rounded-pill w-100 fw-semibold">
+                            Haberi Oku <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Haber 3 -->
+            <div class="col-lg-4 col-md-12">
+                <div class="card border-0 shadow-sm rounded-4 h-100 bg-white d-flex flex-column justify-content-between p-4">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-info text-white rounded-pill px-3 py-1">Sistem & Kernel</span>
+                            <small class="text-muted"><i class="bi bi-clock me-1"></i>2 Gün Önce</small>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">Açık Kaynak İşletim Sistemlerinde Yeni Eğilimler</h5>
+                        <p class="text-secondary small mb-0">Linux çekirdeğindeki güncellemeler ve özel kernel mimarileri, sistem geliştiricileri arasında popülerliğini artırıyor.</p>
+                    </div>
+                    <div class="pt-3 border-top mt-4">
+                        <a href="/News/Detail/acik-kaynak-isletim-sistemleri" class="btn btn-outline-info text-dark btn-sm rounded-pill w-100 fw-semibold">
+                            Haberi Oku <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

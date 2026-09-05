@@ -1,0 +1,166 @@
+﻿@{
+    ViewData["Title"] = "Pomodoro Pro - Odaklanma & Zaman Yönetimi";
+}
+
+<!-- Hero Header Section -->
+<div class="bg-dark text-white py-5 mb-5 shadow-sm">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="badge bg-danger rounded-pill px-3 py-2">v1.0.0</span>
+                    <span class="badge bg-outline-light text-light border rounded-pill px-3 py-2">C# & .NET</span>
+                    <span class="badge bg-success rounded-pill px-3 py-2">Ücretsiz / Açık Kaynak</span>
+                </div>
+                <h1 class="display-4 fw-extrabold mb-3">Pomodoro Pro</h1>
+                <p class="lead text-white-50 mb-4">
+                    Yazılımcılar ve öğrenciler için özel olarak tasarlanmış, kişiselleştirilebilir çalışma/mola süreleri, sesli bildirimler ve istatistik takibi sunan masaüstü odaklanma uygulaması.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <!-- İndirme Butonu -->
+                    <a href="#" class="btn btn-danger rounded-pill px-4 py-2 font-weight-bold d-inline-flex align-items-center gap-2">
+                        <i class="bi bi-download fs-5"></i> Kurulumu İndir (.exe)
+                    </a>
+                    <!-- GitHub Repo Linki -->
+                    <a href="https://github.com/ahmetcoder55/DevPomodoroNTierArchitecture" target="_blank" class="btn btn-outline-light rounded-pill px-4 py-2 font-weight-bold d-inline-flex align-items-center gap-2">
+                        <i class="bi bi-github fs-5"></i> GitHub Repo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sağ Taraf: Ana Resim Yer Tutucu (Placeholder) -->
+            <div class="col-lg-5 text-center">
+                <div class="bg-black bg-opacity-50 p-3 rounded-4 border border-secondary shadow-lg">
+                    <!-- Resim Eklendiğinde Buradaki <img> Etiketini Kullanabilirsin: -->
+                    <!-- <img src="~/images/software/pomodoro-main.png" alt="Pomodoro Pro Ekran Görüntüsü" class="img-fluid rounded-3"> -->
+                    <!-- Boş Resim Yer Tutucu (Placeholder) -->
+                    <div class="p-5 border border-dashed border-secondary rounded-3 text-center text-muted my-2">
+                        <i class="bi bi-image display-1 text-danger opacity-75 d-block mb-3"></i>
+                        <h6 class="fw-bold text-white mb-1">Uygulama Ekran Görüntüsü / Mockup</h6>
+                        <small class="text-white-50">Buraya Pomodoro uygulamasının ana ekran resmini ekleyebilirsin.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Details & Documentation Section -->
+<div class="container mb-5">
+    <div class="row g-5">
+
+        <!-- Sol Kolon: Proje Detayları ve Ekran Görüntüsü Galeri Alanı -->
+        <div class="col-lg-8">
+            <!-- Proje Açıklaması -->
+            <section class="mb-5">
+                <h3 class="fw-bold text-dark mb-3">Proje Hakkında</h3>
+                <p class="text-secondary lh-lg">
+                    Pomodoro Pro, çalışma verimliliğinizi artırmak ve zihinsel yorgunluğu en aza indirmek amacıyla klasik Pomodoro tekniğini (25 dk çalışma, 5 dk kısa mola) temel alarak geliştirilmiştir. Sade ve dikkat dağıtmayan arayüzü sayesinde arka planda minimum sistem kaynağı tüketerek çalışır.
+                </p>
+            </section>
+
+            <!-- Öne Çıkan Özellikler Grid -->
+            <section class="mb-5">
+                <h4 class="fw-bold text-dark mb-4">Öne Çıkan Özellikler</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+                            <i class="bi bi-stopwatch text-danger fs-2 mb-2 d-block"></i>
+                            <h6 class="fw-bold text-dark">Esnek Zamanlayıcı</h6>
+                            <p class="text-muted small mb-0">Çalışma, kısa mola ve uzun mola sürelerini kendi çalışma ritminize göre kolayca ayarlayın.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+                            <i class="bi bi-bell text-danger fs-2 mb-2 d-block"></i>
+                            <h6 class="fw-bold text-dark">Sesli & Görsel Bildirimler</h6>
+                            <p class="text-muted small mb-0">Süre dolduğunda masaüstü bildirimleri ve özelleştirilebilir alarm sesleri ile sizi uyarır.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+                            <i class="bi bi-bar-chart-line text-danger fs-2 mb-2 d-block"></i>
+                            <h6 class="fw-bold text-dark">Günlük Çalışma İstatistikleri</h6>
+                            <p class="text-muted small mb-0">Tamamlanan oturum sayılarını kayıt altına alarak günlük ve haftalık verimliliğinizi analiz eder.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+                            <i class="bi bi-moon-stars text-danger fs-2 mb-2 d-block"></i>
+                            <h6 class="fw-bold text-dark">Sistem Tepsisi (Tray) Modu</h6>
+                            <p class="text-muted small mb-0">Uygulamayı küçülttüğünüzde Windows sistem tepsisinde çalışmaya devam eder, ekranda yer kaplamaz.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- İkinci Boş Resim Alanı (Ekran Görüntüleri Galerisi İçin) -->
+            <section class="mb-5">
+                <h4 class="fw-bold text-dark mb-3">Uygulama İçi Görseller</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="p-4 border border-dashed rounded-4 bg-light text-center">
+                            <i class="bi bi-aspect-ratio text-secondary display-4 d-block mb-2"></i>
+                            <span class="fw-semibold text-secondary small">Ayarlar Sayfası Görseli</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 border border-dashed rounded-4 bg-light text-center">
+                            <i class="bi bi-pie-chart text-secondary display-4 d-block mb-2"></i>
+                            <span class="fw-semibold text-secondary small">İstatistik Grafiği Görseli</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sağ Kolon: Sistem Gereksinimleri ve Künye -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white sticky-top" style="top: 90px;">
+                <h5 class="fw-bold text-dark mb-4 border-bottom pb-3">Yazılım Bilgileri</h5>
+
+                <div class="mb-3">
+                    <small class="text-muted d-block mb-1">Geliştirici</small>
+                    <span class="fw-bold text-dark">Developer Ahmet</span>
+                </div>
+
+                <div class="mb-3">
+                    <small class="text-muted d-block mb-1">Kullanılan Teknolojiler</small>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-light text-dark border">C#</span>
+                        <span class="badge bg-light text-dark border">.NET</span>
+                        <span class="badge bg-light text-dark border">WPF / WinForms</span>
+                        <span class="badge bg-light text-dark border">SQLite</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <small class="text-muted d-block mb-1">Platform Support</small>
+                    <span class="fw-semibold text-dark">Windows 10 / 11</span>
+                </div>
+
+                <div class="mb-3">
+                    <small class="text-muted d-block mb-1">Lisans</small>
+                    <span class="fw-semibold text-dark">MIT License</span>
+                </div>
+
+                <div class="mb-4">
+                    <small class="text-muted d-block mb-1">Son Güncelleme</small>
+                    <span class="fw-semibold text-dark">Eylül 2026</span>
+                </div>
+
+                <hr>
+
+                <div class="d-grid gap-2">
+                    <a href="https://github.com/ahmetcoder55/DevPomodoroNTierArchitecture" target="_blank" class="btn btn-outline-dark rounded-pill fw-semibold">
+                        <i class="bi bi-star me-1"></i> GitHub'da Yıldızla
+                    </a>
+                    <a href="/Software" class="btn btn-link text-secondary text-decoration-none text-center small mt-2">
+                        <i class="bi bi-arrow-left me-1"></i> Tüm Yazılımlara Dön
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

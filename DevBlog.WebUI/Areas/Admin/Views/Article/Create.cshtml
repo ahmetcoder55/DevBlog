@@ -1,0 +1,67 @@
+﻿@using DevBlog.Business.DTOs
+@model ArticleCreateDto
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Yeni Makale Ekle";
+}
+
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white" style="max-width: 900px;">
+    <h5 class="fw-bold mb-4">Yeni Makale Ekle</h5>
+
+    <div asp-validation-summary="All" class="alert alert-danger rounded-3 mb-4" style="@(ViewData.ModelState.IsValid ? "display:none;" : "")"></div>
+
+    <form asp-area="Admin" asp-controller="Article" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label class="form-label fw-semibold">Başlık</label>
+                <input type="text" name="Title" value="@Model?.Title" class="form-control rounded-3" placeholder="Makale başlığı" required />
+            </div>
+
+            <!-- KATEGORİ -->
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Kategori</label>
+                <select name="CategoryId" class="form-select rounded-3" required>
+                    <option value="">Kategori Seçin</option>
+                    @if (ViewBag.Categories != null)
+                    {
+                        foreach (var category in (IEnumerable<CategoryDto>)ViewBag.Categories)
+                        {
+                            <option value="@category.Id" selected="@(Model?.CategoryId == category.Id ? "selected" : null)">
+                                @category.Name
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- ÖZET (İSTEĞE BAĞLI) -->
+            <div class="col-12">
+                <label class="form-label fw-semibold">Özet (Opsiyonel)</label>
+                <input type="text" name="Summary" value="@Model?.Summary" class="form-control rounded-3" placeholder="Kısa özet (Boş bırakılırsa içerikten alınır)" />
+            </div>
+
+            <!-- GÖRSEL URL -->
+            <div class="col-12">
+                <label class="form-label fw-semibold">Görsel URL</label>
+                <input type="text" name="ThumbnailUrl" value="@Model?.ThumbnailUrl" class="form-control rounded-3" placeholder="https://..." />
+            </div>
+
+            <!-- İÇERİK -->
+            <div class="col-12">
+                <label class="form-label fw-semibold">İçerik (Markdown)</label>
+                <textarea name="Content" class="form-control rounded-3" rows="10" placeholder="Makale içeriğini girin..." required>@Model?.Content</textarea>
+            </div>
+
+            <!-- BUTONLAR -->
+            <div class="col-12 pt-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary rounded-3 px-4 fw-semibold">
+                    <i class="bi bi-check-lg me-1"></i> Kaydet ve Yayınla
+                </button>
+                <a href="/Admin/Article" class="btn btn-outline-secondary rounded-3 px-4">İptal</a>
+            </div>
+        </div>
+    </form>
+</div>

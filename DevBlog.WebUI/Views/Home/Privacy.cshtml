@@ -1,6 +1,61 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Gizlilik ve Çerez Politikası";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container py-5" style="max-width: 900px;">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-semibold mb-2">Yasal Bilgilendirme</span>
+        <h1 class="fw-bold text-dark display-6">Gizlilik ve Çerez Politikası</h1>
+        <p class="text-muted">Son Güncelleme: @DateTime.Now.ToString("dd MMMM yyyy")</p>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+        <div class="mb-4">
+            <h4 class="fw-bold text-primary mb-3">
+                <i class="bi bi-shield-check me-2"></i>1. Kişisel Verilerin Korunması
+            </h4>
+            <p class="text-secondary lh-lg mb-0">
+                DevBlog olarak kişisel verilerinizin güvenliğine önem veriyoruz. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında, platformumuz üzerinden paylaştığınız ad, soyad, e-posta adresi ve yorum verileriniz yalnızca platform hizmetlerinin sunulması ve iletişim süreçlerinin yürütülmesi amacıyla işlenmektedir.
+            </p>
+        </div>
+
+        <hr class="my-4 text-muted opacity-25">
+
+        <div class="mb-4">
+            <h4 class="fw-bold text-primary mb-3">
+                <i class="bi bi-cookie me-2"></i>2. Çerez (Cookie) Kullanımı
+            </h4>
+            <p class="text-secondary lh-lg">
+                Sitemizde kullanıcı deneyimini iyileştirmek, oturum güvenliğini sağlamak ve tercihlerinizi hatırlamak amacıyla çerezler kullanılmaktadır. Sitemizi kullanmaya devam ederek çerez kullanımını kabul etmiş sayılırsınız.
+            </p>
+            <ul class="text-secondary lh-lg mb-0">
+                <li><strong>Zorunlu Çerezler:</strong> Oturum açma ve güvenlik doğrulamaları için gereklidir.</li>
+                <li><strong>Analitik Çerezler:</strong> Site trafiğini ve sayfa ziyaretlerini anonim olarak analiz etmek için kullanılır.</li>
+            </ul>
+        </div>
+
+        <hr class="my-4 text-muted opacity-25">
+
+        <div class="mb-4">
+            <h4 class="fw-bold text-primary mb-3">
+                <i class="bi bi-lock me-2"></i>3. Veri Güvenliği
+            </h4>
+            <p class="text-secondary lh-lg mb-0">
+                Verileriniz yetkisiz erişimlere, kayıplara ve kötüye kullanıma karşı güncel şifreleme standartları (SSL/TLS) ve güvenli veritabanı mimarileri ile korunmaktadır. Verileriniz üçüncü şahıslarla asla paylaşılmaz ve satılmaz.
+            </p>
+        </div>
+
+        <hr class="my-4 text-muted opacity-25">
+
+        <div class="mb-0">
+            <h4 class="fw-bold text-primary mb-3">
+                <i class="bi bi-envelope me-2"></i>4. İletişim
+            </h4>
+            <p class="text-secondary lh-lg mb-0">
+                Gizlilik politikamız veya kişisel verilerinizin işlenmesi ile ilgili her türlü soru sorabilirsiniz.
+            </p>
+        </div>
+    </div>
+</div>

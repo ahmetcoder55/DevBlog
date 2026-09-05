@@ -1,0 +1,148 @@
+﻿@{
+    ViewData["Title"] = "Kurucuk OS - Yazılım Detayı";
+}
+
+<!-- Hero Header Section -->
+<div class="bg-dark text-white py-5 mb-5 shadow-sm">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="badge bg-primary rounded-pill px-3 py-2">v1.0.0</span>
+                    <span class="badge bg-outline-light text-light border rounded-pill px-3 py-2">Assembly & C</span>
+                    <span class="badge bg-success rounded-pill px-3 py-2">Açık Kaynak</span>
+                </div>
+                <h1 class="display-4 fw-extrabold mb-3">Kurucuk OS</h1>
+                <p class="lead text-white-50 mb-4">
+                    16-bit x86 real-mode üzerinde çalışan, özel bootloader mimarisine ve minimal kernel komut arayüzüne sahip custom işletim sistemi prototipi.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <!-- GitHub Linki -->
+                    <a href="#" target="_blank" class="btn btn-light rounded-pill px-4 py-2 font-weight-bold d-inline-flex align-items-center gap-2">
+                        <i class="bi bi-github fs-5"></i> GitHub Repo
+                    </a>
+                    <!-- Doğrudan İndirme Linki -->
+                    <a href="/downloads/kurucuk-os-v1.0.iso" class="btn btn-primary rounded-pill px-4 py-2 font-weight-bold d-inline-flex align-items-center gap-2">
+                        <i class="bi bi-download fs-5"></i> ISO İndir (.iso)
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <!-- Proje Görseli / Konsept Mockup -->
+                <div class="bg-black p-4 rounded-4 border border-secondary shadow">
+                    <i class="bi bi-terminal-fill text-success display-1"></i>
+                    <p class="text-muted small mt-2 mb-0">QEMU & Real Hardware Bootable</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Details & Documentation Content -->
+<div class="container mb-5">
+    <div class="row g-5">
+
+        <!-- Sol Kolon: Detaylar ve Kurulum -->
+        <div class="col-lg-8">
+            <!-- Proje Açıklaması -->
+            <section class="mb-5">
+                <h3 class="fw-bold text-dark mb-3">Proje Hakkında</h3>
+                <p class="text-secondary lh-lg">
+                    Kurucuk OS, sıfırdan x86 mimarisi hedeflenerek geliştirilmiş bir işletim sistemi çekirdeğidir. Bootloader aşamasında BIOS kesmeleri (interrupts) kullanılarak bellek haritası çıkarılır ve 16-bit real mode üzerinde C diliyle yazılmış çekirdeğe geçiş sağlanır.
+                </p>
+            </section>
+
+            <!-- Öne Çıkan Özellikler -->
+            <section class="mb-5">
+                <h4 class="fw-bold text-dark mb-3">Öne Çıkan Özellikler</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="p-3 border rounded-3 bg-white h-100">
+                            <i class="bi bi-cpu text-primary fs-3 mb-2 d-block"></i>
+                            <h6 class="fw-bold">Özel Bootloader</h6>
+                            <p class="text-muted small mb-0">NASM ile yazılmış, 512 baytlık MBR alanına sığan boot sektörü kurgusu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 border rounded-3 bg-white h-100">
+                            <i class="bi bi-display text-primary fs-3 mb-2 d-block"></i>
+                            <h6 class="fw-bold">VGA Ekran Sürücüsü</h6>
+                            <p class="text-muted small mb-0">Video belleğine doğrudan erişim sağlayarak metin modunda renkli çıktı üretimi.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 border rounded-3 bg-white h-100">
+                            <i class="bi bi-keyboard text-primary fs-3 mb-2 d-block"></i>
+                            <h6 class="fw-bold">Klavye Sürücüsü</h6>
+                            <p class="text-muted small mb-0">PS/2 klavye kesmelerini (IRQ 1) dinleyerek komut satırına veri aktarımı.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 border rounded-3 bg-white h-100">
+                            <i class="bi bi-terminal text-primary fs-3 mb-2 d-block"></i>
+                            <h6 class="fw-bold">Minimal Shell</h6>
+                            <p class="text-muted small mb-0">Temel sistem komutlarını (help, clear, sysinfo, reboot) çalıştıran konsol.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Test ve Çalıştırma Adımları (QEMU) -->
+            <section class="mb-5">
+                <h4 class="fw-bold text-dark mb-3">QEMU İle Çalıştırma</h4>
+                <p class="text-secondary small">Projeyi bilgisayarınızda test etmek için terminalde şu komutları sırasıyla çalıştırabilirsiniz:</p>
+                <div class="bg-dark text-light p-3 rounded-3 font-monospace mb-3">
+                    <span class="text-muted"># Derleme (NASM ve GCC)</span><br>
+                    <span>nasm -f bin boot.asm -o boot.bin</span><br>
+                    <span>gcc -ffreestanding -c kernel.c -o kernel.o</span><br><br>
+                    <span class="text-muted"># QEMU Sanal Makinesinde Çalıştırma</span><br>
+                    <span class="text-warning">qemu-system-i386 -fda kurucuk-os.img</span>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sağ Kolon: Sistem Gereksinimleri ve Künye -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white sticky-top" style="top: 90px;">
+                <h5 class="fw-bold text-dark mb-4 border-bottom pb-2">Yazılım Bilgileri</h5>
+
+                <div class="mb-3">
+                    <small class="text-muted d-block mb-1">Geliştirici</small>
+                    <span class="fw-bold text-dark">Developer Ahmet</span>
+                </div>
+
+                <div class="mb-3">
+                    <small class="text-muted d-block mb-1">Kullanılan Teknolojiler</small>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-light text-dark border">Assembly x86</span>
+                        <span class="badge bg-light text-dark border">C Language</span>
+                        <span class="badge bg-light text-dark border">QEMU</span>
+                        <span class="badge bg-light text-dark border">NASM</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <small class="text-muted d-block mb-1">Lisans</small>
+                    <span class="fw-semibold text-dark">MIT License</span>
+                </div>
+
+                <div class="mb-4">
+                    <small class="text-muted d-block mb-1">Son Güncelleme</small>
+                    <span class="fw-semibold text-dark">Ağustos 2026</span>
+                </div>
+
+                <hr>
+
+                <div class="d-grid gap-2">
+                    <a href="#" target="_blank" class="btn btn-outline-dark rounded-pill fw-semibold">
+                        <i class="bi bi-star me-1"></i> GitHub'da Yıldızla
+                    </a>
+                    <a href="/Software" class="btn btn-link text-secondary text-decoration-none text-center small mt-2">
+                        <i class="bi bi-arrow-left me-1"></i> Yazılımlara Dön
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

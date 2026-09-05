@@ -1,0 +1,60 @@
+﻿@using DevBlog.Business.DTOs
+@model ArticleUpdateDto
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Makale Düzenle";
+}
+
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white" style="max-width: 900px;">
+    <h5 class="fw-bold mb-4">Makale Düzenle</h5>
+
+    <div asp-validation-summary="All" class="alert alert-danger rounded-3 mb-4" style="@(ViewData.ModelState.IsValid ? "display:none;" : "")"></div>
+
+    <form asp-area="Admin" asp-controller="Article" asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+
+        <!-- ID DEĞERİ KRİTİKTİR, UNUTULURSA GÜNCELLEME YAPAMAZ -->
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label class="form-label fw-semibold">Başlık</label>
+                <input type="text" name="Title" value="@Model?.Title" class="form-control rounded-3" required />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Kategori</label>
+                <select name="CategoryId" class="form-select rounded-3" required>
+                    <option value="">Kategori Seçin</option>
+                    @if (ViewBag.Categories != null)
+                    {
+                        foreach (var category in (IEnumerable<CategoryDto>)ViewBag.Categories)
+                        {
+                            <option value="@category.Id" selected="@(Model?.CategoryId == category.Id ? "selected" : null)">
+                                @category.Name
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-semibold">Görsel URL</label>
+                <input type="text" name="ThumbnailUrl" value="@Model?.ThumbnailUrl" class="form-control rounded-3" />
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-semibold">İçerik (Markdown)</label>
+                <textarea name="Content" class="form-control rounded-3" rows="10" required>@Model?.Content</textarea>
+            </div>
+
+            <div class="col-12 pt-2 d-flex gap-2">
+                <button type="submit" class="btn btn-warning rounded-3 px-4 fw-semibold text-white">
+                    <i class="bi bi-pencil me-1"></i> Güncelle
+                </button>
+                <a href="/Admin/Article" class="btn btn-outline-secondary rounded-3 px-4">İptal</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,34 @@
+﻿@using DevBlog.Business.DTOs
+@model CategoryCreateDto
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Yeni Kategori Ekle";
+}
+
+<div class="card border-0 shadow-sm rounded-4 p-4 bg-white" style="max-width: 600px;">
+    <h5 class="fw-bold mb-4">Yeni Kategori Ekle</h5>
+
+    <form asp-area="Admin" asp-controller="Category" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="All" class="text-danger small mb-3"></div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Kategori Adı</label>
+            <input type="text" name="Name" value="@Model?.Name" class="form-control rounded-3" placeholder="Örn: Yazılım" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label fw-semibold">Açıklama</label>
+            <textarea name="Description" class="form-control rounded-3" rows="3" placeholder="Kategori açıklaması...">@Model?.Description</textarea>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary rounded-3 px-4 fw-semibold">
+                <i class="bi bi-plus-lg me-1"></i> Kaydet
+            </button>
+            <a href="/Admin/Category" class="btn btn-outline-secondary rounded-3 px-4">İptal</a>
+        </div>
+    </form>
+</div>
